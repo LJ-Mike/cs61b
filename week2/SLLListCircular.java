@@ -1,4 +1,4 @@
-public class SLLList {
+public class SLLListCircular {
 
     private static class IntNode {
         public int item;
@@ -18,20 +18,19 @@ public class SLLList {
     }
     private IntNode sentinel;
     private int size;
-    private IntNode sentinelB;
 
-    public SLLList() {
+    public SLLListCircular() {
         sentinel = new IntNode(0, null, null);
-        sentinelB = new IntNode(0, null, sentinel);
-        sentinel.next = sentinelB;
+        sentinel.next = sentinel;
+        sentinel.prev = sentinel;
         size = 0;
     }
 
-    public SLLList(int x) {
+    public SLLListCircular(int x) {
         sentinel = new IntNode(0, null, null);
-        sentinel.next = new IntNode(x, null, sentinel);
-        sentinelB = new IntNode(0, null, sentinel.next);
-        sentinel.next.next = sentinelB;
+        IntNode p = new IntNode(x, sentinel, sentinel);
+        sentinel.next = p;
+        sentinel.prev = p;
         size = 1;
     }
 
@@ -41,8 +40,9 @@ public class SLLList {
      */
     public void addFirst(int x) {
         size += 1;
-        sentinel.next = new IntNode(x, sentinel.next, sentinel);
-        sentinel.next.next.prev = sentinel.next;
+        IntNode p = new IntNode(x, sentinel.next, sentinel);
+        sentinel.next.prev = p;
+        sentinel.next = p;
     }
 
     /**
@@ -59,9 +59,9 @@ public class SLLList {
      * @param x
      */
     public void addLast(int x) {
-        IntNode p = new IntNode(x, sentinelB, sentinelB.prev);
-        sentinelB.prev.next = p;
-        sentinelB.prev = p;
+        IntNode p = new IntNode(x, sentinel, sentinel.prev);
+        sentinel.prev.next = p;
+        sentinel.prev = p;
         size += 1;
     }
 
@@ -73,17 +73,17 @@ public class SLLList {
     }
 
     public static void main(String[] args) {
-        SLLList L = new SLLList();
-        L.addFirst(20);
+        SLLListCircular L = new SLLListCircular(100);
         L.addLast(5);
         L.addFirst(10);
+        L.addFirst(20);
         L.print();
         System.out.println(L.size());
     }
 
     public void print() {
         IntNode p = sentinel.next;
-        while (p != sentinelB) {
+        while (p != sentinel) {
             System.out.println(p.item);
              p = p.next;
         }
