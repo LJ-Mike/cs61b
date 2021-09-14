@@ -57,4 +57,15 @@ public class IntList {
         }
         return t;
     }
+
+    public void addFirst(int x) {
+        IntList i = new IntList(first, rest);
+        first = x;
+        rest = i;
+    }
+    public static void main(String[] args) {
+        IntList L = new IntList(15, null);
+        L.addFirst(10);
+        L.addFirst(5);
+    }
 }
