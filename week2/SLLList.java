@@ -8,17 +8,17 @@ public class SLLList {
             next = n;
         }
     }
-    private IntNode sentinal;
+    private IntNode sentinel;
     private int size;
 
     public SLLList() {
-        sentinal = new IntNode(0, null);
+        sentinel = new IntNode(0, null);
         size = 0;
     }
 
     public SLLList(int x) {
-        sentinal = new IntNode(0, null);
-        sentinal.next = new IntNode(x, null);
+        sentinel = new IntNode(0, null);
+        sentinel.next = new IntNode(x, null);
         size = 1;
     }
 
@@ -28,7 +28,7 @@ public class SLLList {
      */
     public void addFirst(int x) {
         size += 1;
-        sentinal.next = new IntNode(x, sentinal.next);
+        sentinel.next = new IntNode(x, sentinel.next);
     }
 
     /**
@@ -37,7 +37,7 @@ public class SLLList {
      */
     public int getFirst() {
         if (size == 0) return 0;
-        return sentinal.next.item;
+        return sentinel.next.item;
     }
 
     /**
@@ -60,7 +60,7 @@ public class SLLList {
     public void addLast(int x) {
         size += 1;
 
-        addLast(sentinal, x);
+        addLast(sentinel, x);
     }
 
     /**
