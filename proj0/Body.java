@@ -95,4 +95,9 @@ public class Body {
         this.yyPos = this.yyPos + time * this.yyVel;
     }
 
+    /** Self draw */
+    public void draw() {
+        StdDraw.picture(xxPos, yyPos, imgFileName);
+    }
+
 }
