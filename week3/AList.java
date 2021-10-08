@@ -5,6 +5,7 @@
 public class AList {
     private int[] items;
     private int size;
+
     /** Creates an empty list. */
     public AList() {
         items = new int[100];
@@ -13,6 +14,9 @@ public class AList {
 
     /** Inserts X into the back of the list. */
     public void addLast(int x) {
+        if (size == items.length) {
+            resize();
+        }
         items[size++] = x;
     }
 
@@ -20,6 +24,7 @@ public class AList {
     public int getLast() {
         return get(size - 1);
     }
+
     /** Gets the ith item in the list (0 is the front). */
     public int get(int i) {
         return items[i];
@@ -36,5 +41,12 @@ public class AList {
         int last = getLast();
         items[size--] = 0;
         return last;
+    }
+
+    /** Resize array when the items is more than 100 (default size) */
+    private void resize() {
+        int[] newItems = new int[items.length * 2];
+        System.arraycopy(items, 0, newItems, 0, size);
+        items = newItems;
     }
 } 
